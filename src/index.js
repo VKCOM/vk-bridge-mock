@@ -31,10 +31,6 @@ export default {
   VKWebAppAllowNotifications: {},
   // TODO UI
   VKWebAppDenyNotifications: {},
-  // TODO ???
-  VKWebAppViewUpdateNavigationState: {},
-  // TODO ???
-  VKWebAppSetTitle: {},
   // TODO UI
   VKWebAppShowWallPostBox: {},
   // TODO ???

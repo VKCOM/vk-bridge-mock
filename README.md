@@ -30,8 +30,6 @@ import { VKWebAppInit, VKWebAppGetAuthToken } from '@vkontakte/vk-connect-mock';
 - [ ] VKWebAppShare
 - [ ] VKWebAppAllowNotifications
 - [ ] VKWebAppDenyNotifications
-- [ ] VKWebAppViewUpdateNavigationState
-- [ ] VKWebAppSetTitle
 - [ ] VKWebAppShowWallPostBox
 - [ ] VKWebAppSetLocation
 - [ ] VKWebAppAllowMessagesFromGroup

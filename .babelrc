@@ -11,7 +11,8 @@
       ],
       "plugins": [
         "add-module-exports",
-        "external-helpers"
+        "external-helpers",
+        "transform-object-rest-spread"
       ]
     },
     "production": {
@@ -25,7 +26,8 @@
         "minify"],
       "plugins": [
         "add-module-exports",
-        "external-helpers"
+        "external-helpers",
+        "transform-object-rest-spread"
       ]
     }
   }

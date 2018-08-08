@@ -1,11 +1,11 @@
-import { emailData, emailDataError } from '../Data/VKWebAppGetEmail';
+import { response as res } from '../index';
 import VKWebAppEvent from '../VKWebAppEvent';
 
 /* eslint no-unused-vars: "off" */
 export default (hasError = false) => {
   return {
     postMessage: (params) => {
-      VKWebAppEvent(!hasError ? emailData : emailDataError);
+      VKWebAppEvent(!hasError ? res.VKWebAppGetEmail.data : res.VKWebAppGetEmail.errorData);
     }
   };
 };

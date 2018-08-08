@@ -9,13 +9,9 @@
     "build": "rollup -c",
     "prepublish": "npm run clean && npm run lint && npm run build"
   },
-  "files": [
-    "lib",
-    "src"
-  ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/"
+    "url": "git://github.com/VKCOM/vkui-connect-mock.git"
   },
   "keywords": [
     "npm",
@@ -23,13 +19,15 @@
     "vk",
     "javascript"
   ],
-  "author": "",
-  "homepage": "https://github.com/",
+  "author": "Gleb Vorontsov",
+  "license": "MIT",
+  "homepage": "https://github.com/VKCOM/vkui-connect-mock",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.1",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-minify": "^0.3.0",
     "cross-env": "^5.1.3",

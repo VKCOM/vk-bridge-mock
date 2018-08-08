@@ -1,42 +1,84 @@
-import GetUserInfo from './Handlers/VKWebAppGetUserInfo';
-import Init from './Handlers/VKWebAppInit';
-import GetAuthToken from './Handlers/VKWebAppGetAuthToken';
-import CallAPIMethod from './Handlers/VKWebAppCallAPIMethod';
-import GetGeodata from './Handlers/VKWebAppGetGeodata';
-import GetPhoneNumber from './Handlers/VKWebAppGetPhoneNumber';
-import GetClientVersion from './Handlers/VKWebAppGetClientVersion';
-import GetEmail from './Handlers/VKWebAppGetEmail';
+/* global window */
+
+import messageHandlers from './Handlers';
+import subscribers from './Subscribers';
+import dataMocks from './Data';
+import './CustomEvent';
+
+const FUNCTION = 'function';
+const UNDEFINED = 'unedfined';
+
+if (typeof window !== UNDEFINED) {
+  window.addEventListener('VKWebAppEvent', (e) => {
+    subscribers.forEach((fn) => {
+      fn(e);
+    });
+  });
+}
+
+export const response = dataMocks;
 
 export default {
-  VKWebAppInit: Init(),
-  // Data
-  VKWebAppGetAuthToken: GetAuthToken(),
-  // Data
-  VKWebAppCallAPIMethod: CallAPIMethod(),
-  // Data
-  VKWebAppGetGeodata: GetGeodata(),
-  // Datab
-  VKWebAppGetUserInfo: GetUserInfo(),
-  // Data
-  VKWebAppGetPhoneNumber: GetPhoneNumber(),
-  // Data
-  VKWebAppGetClientVersion: GetClientVersion(),
-  // Data
-  VKWebAppGetEmail: GetEmail(),
-  // TODO UI
-  VKWebAppOpenPayForm: {},
-  // TODO UI
-  VKWebAppShare: {},
-  // TODO UI
-  VKWebAppAllowNotifications: {},
-  // TODO UI
-  VKWebAppDenyNotifications: {},
-  // TODO UI
-  VKWebAppShowWallPostBox: {},
-  // TODO ???
-  VKWebAppSetLocation: {},
-  // TODO UI
-  VKWebAppAllowMessagesFromGroup: {},
-  // TODO UI
-  VKWebAppJoinGroup: {},
+  /**
+   * Sends a message to native client
+   *
+   * @example
+   * message.send('VKWebAppInit');
+   *
+   * @param {String} handler Message type
+   * @param {Object} params Message data
+   * @returns {void}
+   */
+  send: (handler, params) => {
+    /* eslint no-param-reassign: "off" */
+    if (!params) {
+      params = {};
+    }
+
+    const isClient = typeof window !== UNDEFINED;
+    const desktopBridge = isClient && messageHandlers;
+
+    desktopBridge[handler].postMessage(params);
+  },
+  /**
+   * Subscribe on VKWebAppEvent
+   *
+   * @param {Function} fn Event handler
+   * @returns {void}
+   */
+  subscribe: (fn) => {
+    subscribers.push(fn);
+  },
+  /**
+   * Unsubscribe on VKWebAppEvent
+   *
+   * @param {Function} fn Event handler
+   * @returns {void}
+   */
+  unsubscribe: (fn) => {
+    const index = subscribers.indexOf(fn);
+
+    if (index > -1) {
+      subscribers.splice(index, 1);
+    }
+  },
+
+  /**
+   * Checks if native client supports nandler
+   *
+   * @param {String} handler Handler name
+   * @returns {boolean}
+   */
+  supports: (handler) => {
+    const isClient = typeof window !== UNDEFINED;
+    const desktopBridge = isClient && messageHandlers;
+
+    if (desktopBridge &&
+      desktopBridge[handler] &&
+      typeof desktopBridge[handler].postMessage === FUNCTION) {
+      return true;
+    }
+
+    return false;
+  }
 };

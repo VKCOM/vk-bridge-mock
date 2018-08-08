@@ -7,7 +7,8 @@ export default {
   output: {
     file: 'lib/index.js',
     format: 'umd',
-    name: 'vk-connect-mock'
+    name: 'vk-connect-mock',
+    exports: 'named',
   },
   plugins: [
     resolve(),

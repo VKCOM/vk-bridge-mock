@@ -16,6 +16,6 @@ export const apiDataError = {
   error_data: {
     error_code: 1,
     error_msg: 'Error message',
-    request_params: []
+    request_params: [],
   }
 };

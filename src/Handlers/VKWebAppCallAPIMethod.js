@@ -1,5 +1,5 @@
 /* global fetch */
-import { apiData, apiDataError } from '../Data/VKWebAppCallAPIMethod';
+import { response as res } from '../index';
 import VKWebAppEvent from '../VKWebAppEvent';
 
 const stringifyParans = (params) => {
@@ -18,7 +18,7 @@ export default (hasError = false) => {
         .catch((err) => {
           throw new Error(err);
         });
-      VKWebAppEvent(!hasError ? apiData : apiDataError);
+      VKWebAppEvent(!hasError ? res.VKWebAppCallAPIMethod.data : res.VKWebAppCallAPIMethod.errorData);
     }
   };
 };

@@ -1,0 +1,32 @@
+{
+  "env": {
+    "development": {
+      "presets": [
+        [
+          "env",
+          {
+            "modules": false
+          }
+        ]
+      ],
+      "plugins": [
+        "add-module-exports",
+        "external-helpers"
+      ]
+    },
+    "production": {
+      "presets": [
+        [
+          "env",
+          {
+            "modules": false
+          }
+        ], 
+        "minify"],
+      "plugins": [
+        "add-module-exports",
+        "external-helpers"
+      ]
+    }
+  }
+}

@@ -54,6 +54,7 @@ res.VKWebAppGetUserInfo.data = {
   },
 }
 ```
+You can find more information about methods responses [here](https://vk.com/dev/vk_connect_events).
 
 # Available Methods
 - [x] VKWebAppInit

@@ -1,7 +1,7 @@
 {
-  "name": "vk-connect-mock",
+  "name": "@vkontakte/vkui-connect-mock",
   "version": "1.0.0",
-  "description": "VK Connect Mock for development in browser",
+  "description": "VK UI Connect Mock for development in browser",
   "main": "./lib/index.js",
   "scripts": {
     "clean": "rimraf lib",

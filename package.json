@@ -1,6 +1,6 @@
 {
   "name": "@vkontakte/vkui-connect-mock",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "VK UI Connect Mock for development in browser",
   "main": "./lib/index.js",
   "scripts": {

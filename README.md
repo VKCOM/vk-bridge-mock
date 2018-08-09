@@ -15,7 +15,7 @@ or
 Import necessary methods from this library instead of using [vkui-connect](https://www.npmjs.com/package/@vkontakte/vkui-connect):
 
 ``` javascript
-import VKConnect from '@vkontakte/vk-connect-mock';
+import VKConnect from '@vkontakte/vkui-connect-mock';
 ```
 
 And then init VK Connect:
@@ -33,7 +33,7 @@ More documentation regarding VK Connect [is here](https://vk.com/dev/vk_apps_doc
 There are getter and setter for mocked data of each method.
 For example, you want to change response of `VKWebAppGetUserInfo` method:
 ``` javascript
-import { response as res } from  '@vkontakte/vk-connect-mock';
+import { response as res } from  '@vkontakte/vkui-connect-mock';
 res.VKWebAppGetUserInfo.data = {
   type: 'VKWebAppGetUserInfoResult',
   data: {

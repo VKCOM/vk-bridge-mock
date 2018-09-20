@@ -65,6 +65,7 @@ You can find more information about methods responses [here](https://vk.com/dev/
 - [x] VKWebAppGetPhoneNumber
 - [x] VKWebAppGetClientVersion
 - [x] VKWebAppGetEmail
+- [x] VKWebAppAllowMessagesFromGroup
 
 # WIP Methods
 - [ ] VKWebAppOpenPayForm
@@ -73,7 +74,6 @@ You can find more information about methods responses [here](https://vk.com/dev/
 - [ ] VKWebAppDenyNotifications
 - [ ] VKWebAppShowWallPostBox
 - [ ] VKWebAppSetLocation
-- [ ] VKWebAppAllowMessagesFromGroup
 - [ ] VKWebAppJoinGroup
 
 # Developer Mode

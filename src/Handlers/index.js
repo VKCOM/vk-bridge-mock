@@ -6,6 +6,7 @@ import GetGeodata from './VKWebAppGetGeodata';
 import GetPhoneNumber from './VKWebAppGetPhoneNumber';
 import GetClientVersion from './VKWebAppGetClientVersion';
 import GetEmail from './VKWebAppGetEmail';
+import AllowMessagesFromGroup from './VKWebAppAllowMessagesFromGroup';
 
 export default {
   VKWebAppInit: Init(),
@@ -15,7 +16,7 @@ export default {
   VKWebAppCallAPIMethod: CallAPIMethod(),
   // Data
   VKWebAppGetGeodata: GetGeodata(),
-  // Datab
+  // Data
   VKWebAppGetUserInfo: GetUserInfo(),
   // Data
   VKWebAppGetPhoneNumber: GetPhoneNumber(),
@@ -35,8 +36,8 @@ export default {
   VKWebAppShowWallPostBox: {},
   // TODO ???
   VKWebAppSetLocation: {},
-  // TODO UI
-  VKWebAppAllowMessagesFromGroup: {},
+  // Data
+  VKWebAppAllowMessagesFromGroup: AllowMessagesFromGroup(),
   // TODO UI
   VKWebAppJoinGroup: {},
 };

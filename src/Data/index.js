@@ -6,6 +6,7 @@ import { geoData, geoDataError } from './VKWebAppGetGeodata';
 import { phoneData, phoneDataError } from './VKWebAppGetPhoneNumber';
 import { clientData, clientDataError } from './VKWebAppGetClientVersion';
 import { emailData, emailDataError } from './VKWebAppGetEmail';
+import { allowMessagesFromGroupData, allowMessagesFromGroupDataError } from './VKWebAppAllowMessagesFromGroup';
 
 class DataModel {
   constructor(data, errorData) {
@@ -39,7 +40,7 @@ export default {
   VKWebAppCallAPIMethod: new DataModel(apiData, apiDataError),
   // Data
   VKWebAppGetGeodata: new DataModel(geoData, geoDataError),
-  // Datab
+  // Data
   VKWebAppGetUserInfo: new DataModel(userData, userDataError),
   // Data
   VKWebAppGetPhoneNumber: new DataModel(phoneData, phoneDataError),
@@ -59,8 +60,8 @@ export default {
   VKWebAppShowWallPostBox: {},
   // TODO ???
   VKWebAppSetLocation: {},
-  // TODO UI
-  VKWebAppAllowMessagesFromGroup: {},
+  // Data
+  VKWebAppAllowMessagesFromGroup: new DataModel(allowMessagesFromGroupData, allowMessagesFromGroupDataError),
   // TODO UI
   VKWebAppJoinGroup: {},
 };

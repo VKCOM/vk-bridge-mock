@@ -9,7 +9,7 @@ import GetEmail from './VKWebAppGetEmail';
 import Default from './Default';
 
 export default {
- VKWebAppInit: Init(),
+  VKWebAppInit: Init(),
   // Data
   VKWebAppGetAuthToken: GetAuthToken(),
   // Data

@@ -6,6 +6,7 @@ import GetGeodata from './VKWebAppGetGeodata';
 import GetPhoneNumber from './VKWebAppGetPhoneNumber';
 import GetClientVersion from './VKWebAppGetClientVersion';
 import GetEmail from './VKWebAppGetEmail';
+import Default from './Default';
 
 export default {
   VKWebAppInit: Init(),
@@ -24,19 +25,19 @@ export default {
   // Data
   VKWebAppGetEmail: GetEmail(),
   // TODO UI
-  VKWebAppOpenPayForm: {},
+  VKWebAppOpenPayForm: Default("VKWebAppOpenPayForm"),
   // TODO UI
-  VKWebAppShare: {},
+  VKWebAppShare: Default("VKWebAppShare"),
   // TODO UI
-  VKWebAppAllowNotifications: {},
+  VKWebAppAllowNotifications: Default("VKWebAppAllowNotifications"),
   // TODO UI
-  VKWebAppDenyNotifications: {},
+  VKWebAppDenyNotifications: Default("VKWebAppDenyNotifications"),
   // TODO UI
-  VKWebAppShowWallPostBox: {},
+  VKWebAppShowWallPostBox: Default("VKWebAppShowWallPostBox"),
   // TODO ???
-  VKWebAppSetLocation: {},
+  VKWebAppSetLocation: Default("VKWebAppSetLocation"),
   // TODO UI
-  VKWebAppAllowMessagesFromGroup: {},
+  VKWebAppAllowMessagesFromGroup: Default("VKWebAppAllowMessagesFromGroup"),
   // TODO UI
-  VKWebAppJoinGroup: {},
+  VKWebAppJoinGroup: Default("VKWebAppJoinGroup")
 };

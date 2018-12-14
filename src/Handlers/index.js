@@ -25,19 +25,19 @@ export default {
   // Data
   VKWebAppGetEmail: GetEmail(),
   // TODO UI
-  VKWebAppOpenPayForm: Default("VKWebAppOpenPayForm"),
+  VKWebAppOpenPayForm: Default('VKWebAppOpenPayForm'),
   // TODO UI
-  VKWebAppShare: Default("VKWebAppShare"),
+  VKWebAppShare: Default('VKWebAppShare'),
   // TODO UI
-  VKWebAppAllowNotifications: Default("VKWebAppAllowNotifications"),
+  VKWebAppAllowNotifications: Default('VKWebAppAllowNotifications'),
   // TODO UI
-  VKWebAppDenyNotifications: Default("VKWebAppDenyNotifications"),
+  VKWebAppDenyNotifications: Default('VKWebAppDenyNotifications'),
   // TODO UI
-  VKWebAppShowWallPostBox: Default("VKWebAppShowWallPostBox"),
+  VKWebAppShowWallPostBox: Default('VKWebAppShowWallPostBox'),
   // TODO ???
-  VKWebAppSetLocation: Default("VKWebAppSetLocation"),
+  VKWebAppSetLocation: Default('VKWebAppSetLocation'),
   // TODO UI
-  VKWebAppAllowMessagesFromGroup: Default("VKWebAppAllowMessagesFromGroup"),
+  VKWebAppAllowMessagesFromGroup: Default('VKWebAppAllowMessagesFromGroup'),
   // TODO UI
-  VKWebAppJoinGroup: Default("VKWebAppJoinGroup")
+  VKWebAppJoinGroup: Default('VKWebAppJoinGroup')
 };

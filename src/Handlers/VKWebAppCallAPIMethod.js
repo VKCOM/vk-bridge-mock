@@ -2,7 +2,7 @@
 import { response as res } from '../index';
 import VKWebAppEvent from '../VKWebAppEvent';
 
-const stringifyParans = (params) => {
+const stringifyParams = (params) => {
   const paramsKeys = Object.keys(params);
   return paramsKeys.length > 0
     ? paramsKeys.map(key => `${key}=${params[key]}`).join('&')
@@ -12,7 +12,7 @@ const stringifyParans = (params) => {
 export default (hasError = false) => {
   return {
     postMessage: (params) => {
-      fetch(`/${params.method}?${stringifyParans(params.params)}`)
+      fetch(`/${params.method}?${stringifyParams(params.params)}`)
         .then(response => response.json())
         .then(data => data.response)
         .catch((err) => {

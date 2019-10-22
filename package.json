@@ -1,14 +1,9 @@
 {
-  "name": "@vkontakte/vkui-connect-mock",
+  "name": "@vkontakte/vk-connect-mock",
   "version": "1.0.61",
   "description": "VK UI Connect Mock for development in browser",
   "main": "./lib/index.js",
-  "scripts": {
-    "clean": "rimraf lib",
-    "lint": "eslint src",
-    "build": "rollup -c",
-    "prepublish": "npm run clean && npm run lint && npm run build"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git://github.com/VKCOM/vkui-connect-mock.git"
@@ -37,6 +32,7 @@
     "eslint-plugin-react": "^7.4.0",
     "rimraf": "^2.6.2",
     "rollup": "^0.64.0",
-    "rollup-plugin-babel": "^3.0.7"
+    "rollup-plugin-babel": "^3.0.7",
+    "@vkontakte/vk-connect": "^1.6.5"
   }
 }

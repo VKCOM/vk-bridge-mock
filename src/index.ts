@@ -12,7 +12,7 @@ import vkConnect, {
 } from '@vkontakte/vk-connect';
 import { mockDataMap } from './mock';
 
-const receiveOnlyMethods: ReceiveOnlyMethodName[] = [
+export const receiveOnlyMethods: ReceiveOnlyMethodName[] = [
   'VKWebAppAudioPaused',
   'VKWebAppAudioStopped',
   'VKWebAppAudioTrackChanged',
@@ -23,6 +23,8 @@ const receiveOnlyMethods: ReceiveOnlyMethodName[] = [
   'VKWebAppViewHide',
   'VKWebAppViewRestore'
 ];
+
+export const ioMethods = Object.keys(mockDataMap).filter(methodName => !receiveOnlyMethods.includes(methodName as any));
 
 const state = {
   listeners: [] as VKConnectSubscribeHandler[],
@@ -66,7 +68,7 @@ const prepareResponse = <K extends ReceiveMethodName>(
 
   const event: VKConnectSuccessEvent<K> = {
     detail: {
-      type: method + 'Result',
+      type: receiveOnlyMethods.includes(method as any) ? method : method + 'Result',
       data
     }
   };
@@ -130,7 +132,7 @@ const vkConnectMock: VKConnect = {
    * @returns Promise of response data
    */
   sendPromise: async <K extends IOMethodName>(method: K, props?: RequestProps<K>): Promise<ReceiveData<K>> => {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       // if (!isReceiveMethodExists(method)) {
       // TODO
       // }

@@ -1,12 +1,4 @@
-import {
-  ReceiveDataMap,
-  ReceiveMethodName,
-  ReceiveData,
-  RequestMethodName,
-  RequestPropsMap,
-  IOMethodName,
-  ReceiveOnlyMethodName
-} from '@vkontakte/vk-connect';
+import { ReceiveDataMap, ReceiveMethodName, RequestMethodName, RequestPropsMap } from '@vkontakte/vk-connect';
 
 export const mockDataMap: {
   [T in ReceiveMethodName]: (props: T extends RequestMethodName ? RequestPropsMap[T] : {}) => ReceiveDataMap[T];
@@ -80,7 +72,7 @@ export const mockDataMap: {
     ]
   }),
   VKWebAppGetGeodata: () => ({
-    available: 1,
+    available: true,
     lat: '-37',
     long: '89'
   }),
@@ -102,7 +94,8 @@ export const mockDataMap: {
   }),
   VKWebAppGetPhoneNumber: () => ({
     phone_number: '79111234567',
-    sign: 'Y1C99xnbEaR8Wred'
+    sign: 'Y1C99xnbEaR8Wred',
+    is_verified: true
   }),
   VKWebAppGetUserInfo: () => ({
     id: 2314852,
@@ -229,6 +222,8 @@ export const mockDataMap: {
   VKWebAppCommunityToken: () => ({
     access_token: 'cc9521551d93ddb290b32648a37a006d87438a67f953dd37e564eb6db1ec28f79d05c16e207f00a623ef0'
   }),
+  VKWebAppDisableSwipeBack: () => ({}),
+  VKWebAppEnableSwipeBack: () => ({}),
 
   // Incoming only methods
   VKWebAppAudioPaused: () => ({

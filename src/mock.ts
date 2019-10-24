@@ -4,7 +4,8 @@ import {
   ReceiveData,
   RequestMethodName,
   RequestPropsMap,
-  IOMethodName
+  IOMethodName,
+  ReceiveOnlyMethodName
 } from '@vkontakte/vk-connect';
 
 export const mockDataMap: {
@@ -229,7 +230,7 @@ export const mockDataMap: {
     access_token: 'cc9521551d93ddb290b32648a37a006d87438a67f953dd37e564eb6db1ec28f79d05c16e207f00a623ef0'
   }),
 
-  // Lifecycle methods
+  // Incoming only methods
   VKWebAppAudioPaused: () => ({
     type: 'file',
     position: 34,

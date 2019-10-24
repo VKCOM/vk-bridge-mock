@@ -7,9 +7,22 @@ import vkConnect, {
   IOMethodName,
   ReceiveData,
   VKConnectSuccessEvent,
-  ReceiveMethodName
+  ReceiveMethodName,
+  ReceiveOnlyMethodName
 } from '@vkontakte/vk-connect';
 import { mockDataMap } from './mock';
+
+const receiveOnlyMethods: ReceiveOnlyMethodName[] = [
+  'VKWebAppAudioPaused',
+  'VKWebAppAudioStopped',
+  'VKWebAppAudioTrackChanged',
+  'VKWebAppAudioUnpaused',
+  'VKWebAppInitAds',
+  'VKWebAppLoadAds',
+  'VKWebAppUpdateConfig',
+  'VKWebAppViewHide',
+  'VKWebAppViewRestore'
+];
 
 const state = {
   listeners: [] as VKConnectSubscribeHandler[],
@@ -25,19 +38,20 @@ const isReceiveMethodExists = (methodName: string): methodName is ReceiveMethodN
 
 const getMockData = <T extends ReceiveMethodName>(
   methodName: T,
-  props: T extends IOMethodName ? RequestProps<T> : {}
+  props?: T extends IOMethodName ? RequestProps<T> : {}
 ): ReceiveData<T> | null => {
   if (isReceiveMethodExists(methodName)) {
+    // FIXME: any
     return mockDataMap[methodName](props as any) as ReceiveData<T>;
   }
 
   return null;
 };
 
-const prepareResponse = <K extends IOMethodName>(
+const prepareResponse = <K extends ReceiveMethodName>(
   method: K,
   // TODO
-  props: RequestProps<K>
+  props?: K extends RequestMethodName ? RequestProps<K> : {}
 ): VKConnectSuccessEvent<K> | null => {
   if (!isReceiveMethodExists(method)) {
     // TODO
@@ -45,6 +59,7 @@ const prepareResponse = <K extends IOMethodName>(
   }
 
   const data = {
+    // FIXME: any
     ...getMockData(method, props as any)!,
     request_id: state.getNextRequestId()
   };
@@ -57,6 +72,22 @@ const prepareResponse = <K extends IOMethodName>(
   };
 
   return event;
+};
+
+const broadcastData = (event: VKConnectSuccessEvent<ReceiveMethodName>) => {
+  state.listeners.forEach(listener => {
+    listener(event);
+  });
+};
+
+export const callReceiveOnlyMethod = (methodName: ReceiveOnlyMethodName) => {
+  if (receiveOnlyMethods.includes(methodName)) {
+    const event = prepareResponse(methodName);
+
+    if (event) {
+      broadcastData(event);
+    }
+  }
 };
 
 const vkConnectMock: VKConnect = {
@@ -81,9 +112,7 @@ const vkConnectMock: VKConnect = {
       return;
     }
 
-    state.listeners.forEach(listener => {
-      listener(event);
-    });
+    broadcastData(event);
   },
 
   /**
@@ -106,13 +135,14 @@ const vkConnectMock: VKConnect = {
       // TODO
       // }
 
-      const resp = prepareResponse(method, props as any);
+      const event = prepareResponse(method, props as any);
 
-      if (!resp) {
+      if (!event) {
         return;
       }
 
-      resolve(resp.detail.data);
+      broadcastData(event);
+      resolve(event.detail.data);
     });
   },
 

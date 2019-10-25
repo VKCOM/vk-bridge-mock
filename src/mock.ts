@@ -211,16 +211,16 @@ export const mockDataMap: {
     result: true
   }),
   VKWebAppGetCommunityToken: () => ({
-    access_token: 'cc9521551d93ddb290b32648a37a006d87438a67f953dd37e564eb6db1ec28f79d05c16e207f00a623ef0'
+    access_token: 'yours000access111token222yours000access111token222yours000access111token2220123456789'
   }),
   VKWebAppGetCommunityAuthToken: () => ({
-    access_token: 'cc9521551d93ddb290b32648a37a006d87438a67f953dd37e564eb6db1ec28f79d05c16e207f00a623ef0'
+    access_token: 'yours000access111token222yours000access111token222yours000access111token2220123456789'
   }),
   VKWebAppCommunityAccessToken: () => ({
-    access_token: 'cc9521551d93ddb290b32648a37a006d87438a67f953dd37e564eb6db1ec28f79d05c16e207f00a623ef0'
+    access_token: 'yours000access111token222yours000access111token222yours000access111token2220123456789'
   }),
   VKWebAppCommunityToken: () => ({
-    access_token: 'cc9521551d93ddb290b32648a37a006d87438a67f953dd37e564eb6db1ec28f79d05c16e207f00a623ef0'
+    access_token: 'yours000access111token222yours000access111token222yours000access111token2220123456789'
   }),
   VKWebAppDisableSwipeBack: () => ({}),
   VKWebAppEnableSwipeBack: () => ({}),

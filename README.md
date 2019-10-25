@@ -9,13 +9,13 @@ This library mocks [VK Connect](https://www.npmjs.com/package/@vkontakte/vk-conn
 Install the library via yarn
 
 ```
-$ yarn add @vkontakte/vk-mini-apps-api
+$ yarn add @vkontakte/vk-connect-mocks
 ```
 
 or npm
 
 ```
-$ npm install @vkontakte/vk-mini-apps-api
+$ npm install @vkontakte/vk-connect-mocks
 ```
 
 Use in your code instead of using [vk-connect](https://www.npmjs.com/package/@vkontakte/vk-connect) by following way:
@@ -43,7 +43,7 @@ vkConnect.send('VKWebAppGetUserInfo', {});
 ```
 
 Please note that some methods may only receive (for example, `VKWebAppUpdateConfig`,
-`VKWebAppViewHide`, `VKWebAppViewRestore`, etc.). To obtain data from them you need to use the following function:
+`VKWebAppViewHide`, `VKWebAppViewRestore`, etc.). To obtain data from them you need to use the event-based way and `callReceiveOnlyMethod()`
 
 ```javascript
 import vkConnect, { callReceiveOnlyMethod } from '@vkontakte/vk-connect-mock';

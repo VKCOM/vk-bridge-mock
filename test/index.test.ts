@@ -1,5 +1,4 @@
 import vkConnect, { callReceiveOnlyMethod, receiveOnlyMethods, ioMethods } from '../src';
-import { mockDataMap } from '../src/mock';
 import { ReceiveMethodName, VKConnectEvent } from '@vkontakte/vk-connect';
 
 describe('Simple send', () => {

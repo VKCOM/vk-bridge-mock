@@ -1,17 +1,13 @@
 {
-  "name": "@vkontakte/vk-connect-mock",
-  "version": "2.0.0",
+  "name": "@vkontakte/vkui-connect-mock",
+  "version": "1.0.61",
   "description": "VK UI Connect Mock for development in browser",
-  "main": "dist/index.js",
-  "browser": "dist/index.umd.js",
-  "module": "dist/index.es.js",
-  "jsxnext:main": "dist/index.es.js",
-  "umdName": "vkConnectMock",
-  "types": "dist/types/index.d.ts",
+  "main": "./lib/index.js",
   "scripts": {
-    "test": "jest",
-    "build": "rimraf dist && NODE_ENV=production rollup -c",
-    "prepublishOnly": "npm run build"
+    "clean": "rimraf lib",
+    "lint": "eslint src",
+    "build": "rollup -c",
+    "prepublish": "npm run clean && npm run lint && npm run build"
   },
   "repository": {
     "type": "git",
@@ -27,21 +23,20 @@
   "license": "MIT",
   "homepage": "https://github.com/VKCOM/vkui-connect-mock",
   "devDependencies": {
-    "@types/jest": "^24.0.19",
-    "jest": "^24.9.0",
-    "rimraf": "^3.0.0",
-    "rollup": "^1.21.4",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-bundle-size": "^1.0.3",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-typescript2": "^0.24.3",
-    "rollup-plugin-uglify": "^6.0.3",
-    "ts-jest": "^24.1.0",
-    "ts-node": "^8.4.1",
-    "typescript": "^3.6.4"
-  },
-  "dependencies": {
-    "@vkontakte/vk-connect": "^1.6.8"
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.1",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babelrc-rollup": "^3.0.0",
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.64.0",
+    "rollup-plugin-babel": "^3.0.7"
   }
 }

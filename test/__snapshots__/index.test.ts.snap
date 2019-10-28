@@ -132,14 +132,14 @@ Object {
 
 exports[`Send promise VKWebAppCommunityAccessToken: VKWebAppCommunityAccessToken 1`] = `
 Object {
-  "access_token": "cc9521551d93ddb290b32648a37a006d87438a67f953dd37e564eb6db1ec28f79d05c16e207f00a623ef0",
+  "access_token": "yours000access111token222yours000access111token222yours000access111token2220123456789",
   "request_id": 95,
 }
 `;
 
 exports[`Send promise VKWebAppCommunityToken: VKWebAppCommunityToken 1`] = `
 Object {
-  "access_token": "cc9521551d93ddb290b32648a37a006d87438a67f953dd37e564eb6db1ec28f79d05c16e207f00a623ef0",
+  "access_token": "yours000access111token222yours000access111token222yours000access111token2220123456789",
   "request_id": 96,
 }
 `;
@@ -196,14 +196,14 @@ Object {
 
 exports[`Send promise VKWebAppGetCommunityAuthToken: VKWebAppGetCommunityAuthToken 1`] = `
 Object {
-  "access_token": "cc9521551d93ddb290b32648a37a006d87438a67f953dd37e564eb6db1ec28f79d05c16e207f00a623ef0",
+  "access_token": "yours000access111token222yours000access111token222yours000access111token2220123456789",
   "request_id": 94,
 }
 `;
 
 exports[`Send promise VKWebAppGetCommunityToken: VKWebAppGetCommunityToken 1`] = `
 Object {
-  "access_token": "cc9521551d93ddb290b32648a37a006d87438a67f953dd37e564eb6db1ec28f79d05c16e207f00a623ef0",
+  "access_token": "yours000access111token222yours000access111token222yours000access111token2220123456789",
   "request_id": 93,
 }
 `;
@@ -554,14 +554,14 @@ Object {
 
 exports[`Simple send VKWebAppCommunityAccessToken: VKWebAppCommunityAccessToken 1`] = `
 Object {
-  "access_token": "cc9521551d93ddb290b32648a37a006d87438a67f953dd37e564eb6db1ec28f79d05c16e207f00a623ef0",
+  "access_token": "yours000access111token222yours000access111token222yours000access111token2220123456789",
   "request_id": 46,
 }
 `;
 
 exports[`Simple send VKWebAppCommunityToken: VKWebAppCommunityToken 1`] = `
 Object {
-  "access_token": "cc9521551d93ddb290b32648a37a006d87438a67f953dd37e564eb6db1ec28f79d05c16e207f00a623ef0",
+  "access_token": "yours000access111token222yours000access111token222yours000access111token2220123456789",
   "request_id": 47,
 }
 `;
@@ -618,14 +618,14 @@ Object {
 
 exports[`Simple send VKWebAppGetCommunityAuthToken: VKWebAppGetCommunityAuthToken 1`] = `
 Object {
-  "access_token": "cc9521551d93ddb290b32648a37a006d87438a67f953dd37e564eb6db1ec28f79d05c16e207f00a623ef0",
+  "access_token": "yours000access111token222yours000access111token222yours000access111token2220123456789",
   "request_id": 45,
 }
 `;
 
 exports[`Simple send VKWebAppGetCommunityToken: VKWebAppGetCommunityToken 1`] = `
 Object {
-  "access_token": "cc9521551d93ddb290b32648a37a006d87438a67f953dd37e564eb6db1ec28f79d05c16e207f00a623ef0",
+  "access_token": "yours000access111token222yours000access111token222yours000access111token2220123456789",
   "request_id": 44,
 }
 `;

@@ -19,7 +19,8 @@ const getPlugins = (tsDeclaration = false) => [
             compilerOptions: {
               declaration: true,
               declarationDir: 'dist/types'
-            }
+            },
+            exclude: ['test/*']
           }
         }
       : {}

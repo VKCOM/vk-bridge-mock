@@ -1,4 +1,4 @@
-# VK Connect Mock
+# VK Connect Mock [![npm](https://img.shields.io/npm/v/@vkontakte/vk-connect-mock.svg)](https://npmjs.com/package/@vkontakte/vk-connect-mock) [![Build Status](https://travis-ci.org/VKCOM/vk-connect-mock.svg?branch=master)](https://travis-ci.org/VKCOM/vk-connect-mock)
 
 <img width="100" height="100" src="https://avatars3.githubusercontent.com/u/1478241?s=200&v=4" align="right">
 

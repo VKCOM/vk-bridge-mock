@@ -9,13 +9,13 @@ This library mocks [VK Connect](https://www.npmjs.com/package/@vkontakte/vk-conn
 Install the library via yarn
 
 ```
-$ yarn add @vkontakte/vk-connect-mocks
+$ yarn add @vkontakte/vk-connect-mock
 ```
 
 or npm
 
 ```
-$ npm install @vkontakte/vk-connect-mocks
+$ npm install @vkontakte/vk-connect-mock
 ```
 
 Use in your code instead of using [vk-connect](https://www.npmjs.com/package/@vkontakte/vk-connect) by following way:

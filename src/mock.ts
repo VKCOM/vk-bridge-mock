@@ -260,5 +260,8 @@ export const mockDataMap: {
     start_time: 1565272434.911599
   }),
   VKWebAppViewHide: () => ({}),
-  VKWebAppViewRestore: () => ({})
+  VKWebAppViewRestore: () => ({}),
+  VKWebAppShowStoryBox: () => ({
+    result: true
+  })
 };

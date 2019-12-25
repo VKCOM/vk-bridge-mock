@@ -1,5 +1,11 @@
 import vkConnect, { callReceiveOnlyMethod, receiveOnlyMethods, ioMethods } from '../src';
-import { ReceiveMethodName, VKConnectEvent } from '@vkontakte/vk-connect';
+import { ReceiveMethodName, VKConnectEvent, RequestIdProp } from '@vkontakte/vk-connect';
+
+const dropRequestId = <A extends RequestIdProp>(data: A) => {
+  const { request_id, ...out } = data;
+
+  return out;
+};
 
 describe('Simple send', () => {
   ioMethods.forEach(methodName => {
@@ -9,7 +15,7 @@ describe('Simple send', () => {
         new Promise(resolve => {
           const handler = (event: VKConnectEvent<ReceiveMethodName>) => {
             expect(event.detail.type).toBe(methodName + 'Result');
-            expect(event.detail.data).toMatchSnapshot(methodName);
+            expect(dropRequestId(event.detail.data)).toMatchSnapshot(methodName);
 
             resolve(vkConnect.unsubscribe(handler));
           };
@@ -26,7 +32,7 @@ describe('Send promise', () => {
     test(methodName, async () => {
       const mockData = await vkConnect.sendPromise(methodName as any);
 
-      expect(mockData).toMatchSnapshot(methodName);
+      expect(dropRequestId(mockData)).toMatchSnapshot(methodName);
     });
   });
 });
@@ -39,7 +45,7 @@ describe('Receive only events', () => {
         new Promise(resolve => {
           const handler = (event: VKConnectEvent<ReceiveMethodName>) => {
             expect(event.detail.type).toBe(methodName);
-            expect(event.detail.data).toMatchSnapshot(methodName);
+            expect(dropRequestId(event.detail.data)).toMatchSnapshot(methodName);
 
             resolve(vkConnect.unsubscribe(handler));
           };

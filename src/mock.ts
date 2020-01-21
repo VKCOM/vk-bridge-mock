@@ -1,7 +1,7 @@
 import { ReceiveDataMap, ReceiveMethodName, RequestMethodName, RequestPropsMap } from '@vkontakte/vk-connect';
 
 export const mockDataMap: {
-  [T in ReceiveMethodName]: (props: T extends RequestMethodName ? RequestPropsMap[T] : {}) => ReceiveDataMap[T];
+  [T in ReceiveMethodName]?: (props: T extends RequestMethodName ? RequestPropsMap[T] : {}) => ReceiveDataMap[T];
 } = {
   VKWebAppAddToCommunity: () => ({
     group_id: 123_456_789
@@ -10,7 +10,7 @@ export const mockDataMap: {
     result: true
   }),
   VKWebAppAllowNotifications: () => ({
-    enabled: true
+    result: true
   }),
   VKWebAppCallAPIMethod: () => ({
     response: [
@@ -40,7 +40,7 @@ export const mockDataMap: {
     result: true
   }),
   VKWebAppDenyNotifications: () => ({
-    disabled: true
+    result: true
   }),
   VKWebAppFlashGetInfo: () => ({
     is_available: true,

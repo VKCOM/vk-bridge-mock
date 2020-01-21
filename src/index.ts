@@ -8,7 +8,8 @@ import vkConnect, {
   ReceiveData,
   VKConnectSuccessEvent,
   ReceiveMethodName,
-  ReceiveOnlyMethodName
+  ReceiveOnlyMethodName,
+  VKConnectSend
 } from '@vkontakte/vk-connect';
 import { mockDataMap } from './mock';
 
@@ -42,9 +43,9 @@ const getMockData = <T extends ReceiveMethodName>(
   methodName: T,
   props?: T extends IOMethodName ? RequestProps<T> : {}
 ): ReceiveData<T> | null => {
-  if (isReceiveMethodExists(methodName)) {
-    // FIXME: any
-    return mockDataMap[methodName](props as any) as ReceiveData<T>;
+  if (isReceiveMethodExists(methodName) && mockDataMap[methodName]) {
+    // FIXME
+    return mockDataMap[methodName]!(props as any) as ReceiveData<T>;
   }
 
   return null;
@@ -92,66 +93,53 @@ export const callReceiveOnlyMethod = (methodName: ReceiveOnlyMethodName) => {
   }
 };
 
-const vkConnectMock: VKConnect = {
-  /**
-   * Sends a VK Connect method to client
-   *
-   * @example
-   * message.send('VKWebAppInit');
-   *
-   * @param method The VK Connect method
-   * @param [props] Method props object
-   */
-  send: <K extends RequestMethodName>(method: K, props?: RequestProps<K> & RequestIdProp) => {
+const send: VKConnectSend = async (method, props) => {
+  return new Promise((resolve, reject) => {
     if (!isReceiveMethodExists(method)) {
-      // TODO
       return;
     }
 
-    const event = prepareResponse(method, props as any);
+    const event = prepareResponse(method, props);
 
     if (!event) {
       return;
     }
 
     broadcastData(event);
-  },
+    resolve(event.detail.data as any);
+  });
+};
+
+const vkConnectMock: VKConnect = {
+  /**
+   * Sends an event to the runtime env and returns the Promise object with
+   * response data. In the case of Android/iOS application env is the
+   * application itself. In the case of the browser, the parent frame in which
+   * the event handlers is located.
+   *
+   * @param method The method (event) name to send.
+   * @param [props] Method properties.
+   * @returns The Promise object with response data.
+   */
+  send,
 
   /**
-   * Subscribe on VKWebAppEvent
+   * @alias send
+   * @deprecated
+   */
+  sendPromise: send,
+
+  /**
+   * Adds an event listener. It will be called any time a data is received.
    *
-   * @param fn Event handler
+   * @param listener A callback to be invoked on every event receive.
    */
   subscribe: (fn: VKConnectSubscribeHandler) => void state.listeners.push(fn),
 
   /**
-   * Sends a VK Connect method to client and returns a promise of response data
+   * Removes an event listener which has been subscribed for event listening.
    *
-   * @param method The VK Connect method
-   * @param [props] Method props object
-   * @returns Promise of response data
-   */
-  sendPromise: async <K extends IOMethodName>(method: K, props?: RequestProps<K>): Promise<ReceiveData<K>> => {
-    return new Promise((resolve, reject) => {
-      // if (!isReceiveMethodExists(method)) {
-      // TODO
-      // }
-
-      const event = prepareResponse(method, props as any);
-
-      if (!event) {
-        return;
-      }
-
-      broadcastData(event);
-      resolve(event.detail.data);
-    });
-  },
-
-  /**
-   * Unsubscribe on VKWebAppEvent
-   *
-   * @param fn Event handler
+   * @param listener A callback to unsubscribe.
    */
   unsubscribe: (fn: VKConnectSubscribeHandler) => {
     const index = state.listeners.indexOf(fn);
@@ -162,14 +150,17 @@ const vkConnectMock: VKConnect = {
   },
 
   /**
-   * Checks if it is client webview
+   * Checks if a method is supported on runtime platform.
+   *
+   * @param method Method (event) name to check.
+   * @returns Result of checking.
    */
   supports: (method: string): boolean => vkConnect.supports(method),
 
   /**
-   * Checks if native client supports handler
+   * Checks whether the runtime is a WebView.
    *
-   * @param method The VK Connect method
+   * @returns Result of checking.
    */
   isWebView: (): boolean => vkConnect.isWebView()
 };

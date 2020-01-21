@@ -7,30 +7,10 @@ const dropRequestId = <A extends RequestIdProp>(data: A) => {
   return out;
 };
 
-describe('Simple send', () => {
-  ioMethods.forEach(methodName => {
-    test(
-      methodName,
-      () =>
-        new Promise(resolve => {
-          const handler = (event: VKConnectEvent<ReceiveMethodName>) => {
-            expect(event.detail.type).toBe(methodName + 'Result');
-            expect(dropRequestId(event.detail.data)).toMatchSnapshot(methodName);
-
-            resolve(vkConnect.unsubscribe(handler));
-          };
-
-          vkConnect.subscribe(handler);
-          vkConnect.send(methodName as any);
-        })
-    );
-  });
-});
-
-describe('Send promise', () => {
+describe('Send', () => {
   ioMethods.forEach(methodName => {
     test(methodName, async () => {
-      const mockData = await vkConnect.sendPromise(methodName as any);
+      const mockData = await vkConnect.send(methodName as any);
 
       expect(dropRequestId(mockData)).toMatchSnapshot(methodName);
     });

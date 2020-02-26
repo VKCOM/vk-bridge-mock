@@ -1,19 +1,7 @@
 import bridge from '../src';
 import { ReceiveMethodName, VKBridgeEvent, RequestIdProp, ReceiveOnlyMethodName } from '@vkontakte/vk-bridge';
-import { callReceiveOnlyMethod } from '../src/mockFn';
+import { callReceiveOnlyMethod, receiveOnlyMethods } from '../src/mockFn';
 import { mockDataMap } from '../src/mockData';
-
-export const receiveOnlyMethods: ReceiveOnlyMethodName[] = [
-  'VKWebAppAudioPaused',
-  'VKWebAppAudioStopped',
-  'VKWebAppAudioTrackChanged',
-  'VKWebAppAudioUnpaused',
-  'VKWebAppInitAds',
-  'VKWebAppLoadAds',
-  'VKWebAppUpdateConfig',
-  'VKWebAppViewHide',
-  'VKWebAppViewRestore'
-];
 
 export const ioMethods = Object.keys(mockDataMap).filter(methodName => !receiveOnlyMethods.includes(methodName as any));
 

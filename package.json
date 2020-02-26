@@ -1,7 +1,7 @@
 {
   "name": "@vkontakte/vk-connect-mock",
   "version": "2.1.0",
-  "description": "VK UI Connect Mock for development in browser",
+  "description": "VK Connect Mock for development in browser",
   "main": "dist/index.js",
   "browser": "dist/index.umd.js",
   "module": "dist/index.es.js",
@@ -42,6 +42,6 @@
     "typescript": "^3.6.4"
   },
   "dependencies": {
-    "@vkontakte/vk-connect": "^1.8.4"
+    "@vkontakte/vk-connect": "^1.9.1"
   }
 }

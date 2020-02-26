@@ -53,8 +53,7 @@ const getMockData = <T extends ReceiveMethodName>(
 
 const prepareResponse = <K extends ReceiveMethodName>(
   method: K,
-  // TODO
-  props?: K extends RequestMethodName ? RequestProps<K> : {}
+  props?: K extends RequestMethodName ? RequestProps<K> & RequestIdProp : RequestIdProp
 ): VKConnectSuccessEvent<K> | null => {
   if (!isReceiveMethodExists(method)) {
     // TODO
@@ -99,7 +98,7 @@ const send: VKConnectSend = async (method, props) => {
       return;
     }
 
-    const event = prepareResponse(method, props);
+    const event = prepareResponse(method as ReceiveMethodName, props);
 
     if (!event) {
       return;

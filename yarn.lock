@@ -392,10 +392,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@vkontakte/vk-connect@^1.8.4":
-  version "1.8.4"
-  resolved "https://registry.yarnpkg.com/@vkontakte/vk-connect/-/vk-connect-1.8.4.tgz#1c104cf3a342624f6c1fe7ee54de53a9dc1dfe07"
-  integrity sha512-jweXiiCBnXbyxB2+MtZ8AFNFdZ2WgG4iFAgkrsDK4I1ngsSy5rUuDB8zJe+bJy80a7OYSBZtqyuDi0lqumXxlw==
+"@vkontakte/vk-connect@^1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@vkontakte/vk-connect/-/vk-connect-1.9.1.tgz#e2ef892888071eac7252324e70da039c37ca58e3"
+  integrity sha512-a8tPp480/QVP2kR3beFQUJGBEaNegUS1JeJze5/G6i3jJQcK5Q+Yz+xtLy4YopDgy+24nQ8OZRjh3PUkvIrcfA==
 
 abab@^2.0.0:
   version "2.0.3"

@@ -1,7 +1,8 @@
-import vkConnect, { VKConnect } from '@vkontakte/vk-connect';
+import bridge, { VKBridge } from '@vkontakte/vk-bridge';
 import { send, subscribe, unsubscribe } from './mockFn';
+import { callReceiveOnlyMethod } from './mockFn';
 
-const vkConnectMock: VKConnect = {
+const bridgeMock: VKBridge = {
   /**
    * Sends an event to the runtime env and returns the Promise object with
    * response data. In the case of Android/iOS application env is the
@@ -40,14 +41,23 @@ const vkConnectMock: VKConnect = {
    * @param method Method (event) name to check.
    * @returns Result of checking.
    */
-  supports: (method: string): boolean => vkConnect.supports(method),
+  supports: (method: string): boolean => bridge.supports(method),
 
   /**
    * Checks whether the runtime is a WebView.
    *
    * @returns Result of checking.
    */
-  isWebView: (): boolean => vkConnect.isWebView()
+  isWebView: (): boolean => bridge.isWebView()
 };
 
-export default vkConnectMock;
+// Esm exports
+export { callReceiveOnlyMethod } from './mockFn';
+export default bridgeMock;
+
+// Mixed cmj and umd export
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { ...bridgeMock };
+  module.exports.default = { ...bridgeMock };
+  module.exports.callReceiveOnlyMethod = callReceiveOnlyMethod;
+}

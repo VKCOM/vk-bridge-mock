@@ -1,7 +1,8 @@
 import vkConnect, { VKConnect } from '@vkontakte/vk-connect';
 import { send, subscribe, unsubscribe } from './mockFn';
+import { callReceiveOnlyMethod } from './mockFn';
 
-const vkConnectMock: VKConnect = {
+const connectMock: VKConnect = {
   /**
    * Sends an event to the runtime env and returns the Promise object with
    * response data. In the case of Android/iOS application env is the
@@ -50,4 +51,13 @@ const vkConnectMock: VKConnect = {
   isWebView: (): boolean => vkConnect.isWebView()
 };
 
-export default vkConnectMock;
+// Esm exports
+export { callReceiveOnlyMethod } from './mockFn';
+export default connectMock;
+
+// Mixed cmj and umd export
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { ...connectMock };
+  module.exports.default = { ...connectMock };
+  module.exports.callReceiveOnlyMethod = callReceiveOnlyMethod;
+}

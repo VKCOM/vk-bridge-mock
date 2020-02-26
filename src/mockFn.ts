@@ -46,7 +46,7 @@ const getMockData = <T extends ReceiveMethodName>(
   return null;
 };
 
-export const broadcastData = (event: VKConnectSuccessEvent<ReceiveMethodName>) => {
+const broadcastData = (event: VKConnectSuccessEvent<ReceiveMethodName>) => {
   state.listeners.forEach(listener => {
     listener(event);
   });
@@ -104,5 +104,15 @@ export const unsubscribe = (fn: VKConnectSubscribeHandler) => {
 
   if (index > -1) {
     state.listeners.splice(index, 1);
+  }
+};
+
+export const callReceiveOnlyMethod = (methodName: ReceiveOnlyMethodName) => {
+  if (receiveOnlyMethods.includes(methodName)) {
+    const event = prepareResponse(methodName);
+
+    if (event) {
+      broadcastData(event);
+    }
   }
 };

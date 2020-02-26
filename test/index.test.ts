@@ -1,19 +1,7 @@
 import vkConnect from '../src';
-import { ReceiveMethodName, VKConnectEvent, RequestIdProp, ReceiveOnlyMethodName } from '@vkontakte/vk-connect';
-import { prepareResponse, broadcastData } from '../src/mockFn';
+import { ReceiveMethodName, VKConnectEvent, RequestIdProp } from '@vkontakte/vk-connect';
+import { receiveOnlyMethods, callReceiveOnlyMethod } from '../src/mockFn';
 import { mockDataMap } from '../src/mockData';
-
-export const receiveOnlyMethods: ReceiveOnlyMethodName[] = [
-  'VKWebAppAudioPaused',
-  'VKWebAppAudioStopped',
-  'VKWebAppAudioTrackChanged',
-  'VKWebAppAudioUnpaused',
-  'VKWebAppInitAds',
-  'VKWebAppLoadAds',
-  'VKWebAppUpdateConfig',
-  'VKWebAppViewHide',
-  'VKWebAppViewRestore'
-];
 
 export const ioMethods = Object.keys(mockDataMap).filter(methodName => !receiveOnlyMethods.includes(methodName as any));
 
@@ -21,16 +9,6 @@ const dropRequestId = <A extends RequestIdProp>(data: A) => {
   const { request_id, ...out } = data;
 
   return out;
-};
-
-export const callReceiveOnlyMethod = (methodName: ReceiveOnlyMethodName) => {
-  if (receiveOnlyMethods.includes(methodName)) {
-    const event = prepareResponse(methodName);
-
-    if (event) {
-      broadcastData(event);
-    }
-  }
 };
 
 describe('Send', () => {

@@ -1,6 +1,11 @@
-# VK Bridge Mock [![npm](https://img.shields.io/npm/v/@vkontakte/vk-bridge-mock.svg)](https://npmjs.com/package/@vkontakte/vk-bridge-mock) [![Build Status](https://travis-ci.org/VKCOM/vk-bridge-mock.svg?branch=master)](https://travis-ci.org/VKCOM/vk-bridge-mock)
+[npm-badge]: https://img.shields.io/npm/v/@vkontakte/vk-mini-apps-api.svg
+[npm-link]: https://npmjs.com/package/@vkontakte/vk-mini-apps-api
+[travis-badge]: https://travis-ci.org/VKCOM/vk-bridge-mock.svg?branch=master
+[travis-link]: https://travis-ci.org/VKCOM/vk-bridge-mock
 
-<img width="100" height="100" src="https://avatars3.githubusercontent.com/u/1478241?s=200&v=4" align="right">
+[<img width="134" src="https://vk.com/images/apps/mini_apps/vk_mini_apps_logo.svg">](https://vk.com/services)
+
+# VK Bridge Mock [![NPM][npm-badge]][npm-link] [![Travis][travis-badge]][travis-link]
 
 This library mocks [VK Bridge](https://www.npmjs.com/package/@vkontakte/vk-bridge) methods.
 

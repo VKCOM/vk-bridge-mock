@@ -5,11 +5,11 @@ import {
   RequestProps,
   ReceiveData,
   RequestIdProp,
-  VKConnectSuccessEvent,
-  VKConnectSubscribeHandler,
-  VKConnectSend,
+  VKBridgeSuccessEvent,
+  VKBridgeSubscribeHandler,
+  VKBridgeSend,
   ReceiveOnlyMethodName
-} from '@vkontakte/vk-connect';
+} from '@vkontakte/vk-bridge';
 import { mockDataMap } from './mockData';
 
 export const receiveOnlyMethods: ReceiveOnlyMethodName[] = [
@@ -25,7 +25,7 @@ export const receiveOnlyMethods: ReceiveOnlyMethodName[] = [
 ];
 
 const state = {
-  listeners: [] as VKConnectSubscribeHandler[],
+  listeners: [] as VKBridgeSubscribeHandler[],
   currentRequestId: 0,
   getNextRequestId() {
     this.currentRequestId++;
@@ -46,7 +46,7 @@ const getMockData = <T extends ReceiveMethodName>(
   return null;
 };
 
-const broadcastData = (event: VKConnectSuccessEvent<ReceiveMethodName>) => {
+export const broadcastData = (event: VKBridgeSuccessEvent<ReceiveMethodName>) => {
   state.listeners.forEach(listener => {
     listener(event);
   });
@@ -55,7 +55,7 @@ const broadcastData = (event: VKConnectSuccessEvent<ReceiveMethodName>) => {
 export const prepareResponse = <K extends ReceiveMethodName>(
   method: K,
   props?: K extends RequestMethodName ? RequestProps<K> & RequestIdProp : RequestIdProp
-): VKConnectSuccessEvent<K> | null => {
+): VKBridgeSuccessEvent<K> | null => {
   if (!isReceiveMockMethodExists(method)) {
     // TODO
     return null;
@@ -67,7 +67,7 @@ export const prepareResponse = <K extends ReceiveMethodName>(
     request_id: state.getNextRequestId()
   };
 
-  const event: VKConnectSuccessEvent<K> = {
+  const event: VKBridgeSuccessEvent<K> = {
     detail: {
       type: receiveOnlyMethods.includes(method as any) ? method : method + 'Result',
       data
@@ -80,7 +80,7 @@ export const prepareResponse = <K extends ReceiveMethodName>(
 export const isReceiveMockMethodExists = (methodName: string): methodName is ReceiveMethodName =>
   methodName in mockDataMap;
 
-export const send: VKConnectSend = async (method, props) => {
+export const send: VKBridgeSend = async (method, props) => {
   return new Promise((resolve, reject) => {
     if (!isReceiveMockMethodExists(method)) {
       return;
@@ -97,9 +97,9 @@ export const send: VKConnectSend = async (method, props) => {
   });
 };
 
-export const subscribe = (fn: VKConnectSubscribeHandler) => void state.listeners.push(fn);
+export const subscribe = (fn: VKBridgeSubscribeHandler) => void state.listeners.push(fn);
 
-export const unsubscribe = (fn: VKConnectSubscribeHandler) => {
+export const unsubscribe = (fn: VKBridgeSubscribeHandler) => {
   const index = state.listeners.indexOf(fn);
 
   if (index > -1) {

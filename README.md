@@ -1,29 +1,29 @@
-# VK Connect Mock [![npm](https://img.shields.io/npm/v/@vkontakte/vk-connect-mock.svg)](https://npmjs.com/package/@vkontakte/vk-connect-mock) [![Build Status](https://travis-ci.org/VKCOM/vk-connect-mock.svg?branch=master)](https://travis-ci.org/VKCOM/vk-connect-mock)
+# VK Bridge Mock [![npm](https://img.shields.io/npm/v/@vkontakte/vk-bridge-mock.svg)](https://npmjs.com/package/@vkontakte/vk-bridge-mock) [![Build Status](https://travis-ci.org/VKCOM/vk-bridge-mock.svg?branch=master)](https://travis-ci.org/VKCOM/vk-bridge-mock)
 
 <img width="100" height="100" src="https://avatars3.githubusercontent.com/u/1478241?s=200&v=4" align="right">
 
-This library mocks [VK Connect](https://www.npmjs.com/package/@vkontakte/vk-connect) methods.
+This library mocks [VK Bridge](https://www.npmjs.com/package/@vkontakte/vk-bridge) methods.
 
 ## Usage
 
 Install the library via yarn
 
 ```
-$ yarn add @vkontakte/vk-connect-mock
+$ yarn add @vkontakte/vk-bridge-mock
 ```
 
 or npm
 
 ```
-$ npm install @vkontakte/vk-connect-mock
+$ npm install @vkontakte/vk-bridge-mock
 ```
 
-Use in your code instead of using [vk-connect](https://www.npmjs.com/package/@vkontakte/vk-connect) by following way:
+Use in your code instead of using [vk-bridge](https://www.npmjs.com/package/@vkontakte/vk-bridge) by following way:
 
 ```javascript
-import vkConnect from '@vkontakte/vk-connect-mock';
+import bridge from '@vkontakte/vk-bridge-mock';
 
-vkConnect.sendPromise('VKWebAppGetUserInfo', {}).then(data => {
+bridge.send('VKWebAppGetUserInfo', {}).then(data => {
   // Do something
 });
 ```
@@ -31,24 +31,24 @@ vkConnect.sendPromise('VKWebAppGetUserInfo', {}).then(data => {
 Or event-based way:
 
 ```javascript
-import vkConnect from '@vkontakte/vk-connect-mock';
+import bridge from '@vkontakte/vk-bridge-mock';
 
-vkConnect.subscribe(e => {
+bridge.subscribe(e => {
   if (e.detail.type === 'VKWebAppGetUserInfoResult') {
     // Do something
   }
 });
 
-vkConnect.send('VKWebAppGetUserInfo', {});
+bridge.send('VKWebAppGetUserInfo', {});
 ```
 
 Please note that some methods may only receive (for example, `VKWebAppUpdateConfig`,
 `VKWebAppViewHide`, `VKWebAppViewRestore`, etc.). To obtain data from them you need to use the event-based way and `callReceiveOnlyMethod()`
 
 ```javascript
-import vkConnect, { callReceiveOnlyMethod } from '@vkontakte/vk-connect-mock';
+import bridge, { callReceiveOnlyMethod } from '@vkontakte/vk-bridge-mock';
 
-vkConnect.subscribe(e => {
+bridge.subscribe(e => {
   if (e.detail.type === 'VKWebAppUpdateConfig') {
     // Do something
   }
@@ -58,7 +58,7 @@ vkConnect.subscribe(e => {
 callReceiveOnlyMethod('VKWebAppUpdateConfig');
 ```
 
-More documentation regarding VK Connect [is here](https://vk.com/dev/vk_apps_docs?f=4.%20%D0%9F%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%20VK%20Connect).
+More documentation regarding VK Bridge [is here](https://vk.com/dev/vk_apps_docs?f=4.%20%D0%9F%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%20VK%20Connect).
 
 ## Using with [VK Mini Apps API](https://github.com/vkcom/vk-mini-apps-api)
 
@@ -66,10 +66,10 @@ You can also use this library in conjunction with VK Mini Apps API:
 
 ```javascript
 import { VKMiniAppAPI } from '@vkontakte/vk-mini-apps-api';
-import vkConnectMock from '@vkontakte/vk-connect-mock';
+import bridgeMock from '@vkontakte/vk-bridge-mock';
 
 // Creating API instance
-const api = new VKMiniAppAPI(vkConnectMock);
+const api = new VKMiniAppAPI(bridgeMock);
 
 // Using methods
 api.getUserInfo().then(userInfo => {

@@ -6,7 +6,6 @@
   "browser": "dist/index.umd.js",
   "module": "dist/index.es.js",
   "jsxnext:main": "dist/index.es.js",
-  "umdName": "vkBridgeMock",
   "types": "dist/types/index.d.ts",
   "scripts": {
     "test": "jest",

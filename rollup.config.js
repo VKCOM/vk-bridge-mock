@@ -8,7 +8,8 @@ import pkg from './package.json';
 
 const IS_PROD = process.env.NODE_ENV === 'production';
 
-const INPUT_FILE = 'src/index.ts';
+const INPUT_FILE = './src/index.ts';
+const INPUT_FILE_BROWSER = './src/browser.ts';
 
 const getPlugins = (tsDeclaration = false) => [
   typescript(
@@ -35,20 +36,16 @@ const cjs = {
   plugins: getPlugins(true),
   input: INPUT_FILE,
   output: {
+    exports: 'named',
     file: pkg.main,
     format: 'cjs'
   }
 };
 
-const umdAndEs = {
+const es = {
   plugins: getPlugins(),
   input: INPUT_FILE,
   output: [
-    {
-      name: pkg.umdName,
-      file: pkg.browser,
-      format: 'umd'
-    },
     {
       file: pkg.module,
       format: 'es'
@@ -56,16 +53,15 @@ const umdAndEs = {
   ]
 };
 
-const umdMin = {
+const umd = {
   plugins: [...getPlugins(), uglify()],
-  input: INPUT_FILE,
-  output: {
-    name: pkg.umdName,
-    file: pkg.browser.split('.').reduce((acc, item, i, arr) => {
-      return i === arr.length - 1 ? acc + 'min.' + item : acc + item + '.';
-    }, ''),
-    format: 'umd'
-  }
+  input: INPUT_FILE_BROWSER,
+  output: [
+    {
+      file: pkg.browser,
+      format: 'umd'
+    }
+  ]
 };
 
-export default IS_PROD ? [cjs, umdAndEs, umdMin] : cjs;
+export default IS_PROD ? [cjs, es, umd] : cjs;

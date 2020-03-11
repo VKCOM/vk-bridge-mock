@@ -11,22 +11,13 @@ This library mocks [VK Bridge](https://www.npmjs.com/package/@vkontakte/vk-bridg
 
 ## Usage
 
-Install the library via yarn
-
-```
-$ yarn add @vkontakte/vk-bridge-mock
-```
-
-or npm
-
-```
-$ npm install @vkontakte/vk-bridge-mock
-```
-
 Use in your code instead of using [vk-bridge](https://www.npmjs.com/package/@vkontakte/vk-bridge) by following way:
 
 ```javascript
 import bridge from '@vkontakte/vk-bridge-mock';
+
+// App init
+bridge.send('VKWebAppInit');
 
 bridge.send('VKWebAppGetUserInfo', {}).then(data => {
   // Do something
@@ -37,6 +28,9 @@ Or event-based way:
 
 ```javascript
 import bridge from '@vkontakte/vk-bridge-mock';
+
+// App init
+bridge.send('VKWebAppInit');
 
 bridge.subscribe(e => {
   if (e.detail.type === 'VKWebAppGetUserInfoResult') {
@@ -53,6 +47,9 @@ Please note that some methods may only receive (for example, `VKWebAppUpdateConf
 ```javascript
 import bridge, { callReceiveOnlyMethod } from '@vkontakte/vk-bridge-mock';
 
+// App init
+bridge.send('VKWebAppInit');
+
 bridge.subscribe(e => {
   if (e.detail.type === 'VKWebAppUpdateConfig') {
     // Do something
@@ -61,6 +58,26 @@ bridge.subscribe(e => {
 
 // Use this function when you need to get data
 callReceiveOnlyMethod('VKWebAppUpdateConfig');
+```
+
+For use without code bundler, include the file `dist/browser.min.js` and use as follows
+
+```js
+<script src="https://unpkg.com/@vkontakte/vk-bridge-mock/dist/browser.min.js"></script>
+
+<script>
+  // Sends event to client
+  vkBridgeMock.send('VKWebAppInit');
+
+  vkBridgeMock.subscribe(e => {
+    if (e.detail.type === 'VKWebAppUpdateConfig') {
+      // Do something
+    }
+  });
+
+  // Use this function when you need to get data
+  vkBridgeCallReceiveOnlyMethod('VKWebAppUpdateConfig');
+</script>
 ```
 
 More documentation regarding VK Bridge [is here](https://vk.com/dev/vk_apps_docs?f=4.%20%D0%9F%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%20VK%20Connect).

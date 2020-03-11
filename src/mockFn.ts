@@ -1,14 +1,16 @@
 import {
-  ReceiveMethodName,
-  RequestMethodName,
-  IOMethodName,
+  AnyReceiveMethodName,
+  AnyRequestMethodName,
+  AnyIOMethodName,
   RequestProps,
   ReceiveData,
   RequestIdProp,
-  VKBridgeSuccessEvent,
   VKBridgeSubscribeHandler,
   VKBridgeSend,
-  ReceiveOnlyMethodName
+  ReceiveOnlyMethodName,
+  VKBridgeResultEvent,
+  AnyReceiveOnlyMethodName,
+  AnyMethodName
 } from '@vkontakte/vk-bridge';
 import { mockDataMap } from './mockData';
 
@@ -34,9 +36,9 @@ const state = {
   }
 };
 
-const getMockData = <T extends ReceiveMethodName>(
+const getMockData = <T extends AnyReceiveMethodName>(
   methodName: T,
-  props?: T extends IOMethodName ? RequestProps<T> : {}
+  props?: T extends AnyIOMethodName ? RequestProps<T> : {}
 ): ReceiveData<T> | null => {
   if (isReceiveMockMethodExists(methodName) && mockDataMap[methodName]) {
     // FIXME
@@ -46,38 +48,54 @@ const getMockData = <T extends ReceiveMethodName>(
   return null;
 };
 
-export const broadcastData = (event: VKBridgeSuccessEvent<ReceiveMethodName>) => {
+const isReceiveOnlyMethod = <A extends AnyReceiveOnlyMethodName>(method: AnyMethodName): method is A =>
+  receiveOnlyMethods.includes(method as any);
+
+export const broadcastData = (event: VKBridgeResultEvent<AnyReceiveMethodName>) => {
   state.listeners.forEach(listener => {
     listener(event);
   });
 };
 
-export const prepareResponse = <K extends ReceiveMethodName>(
+export const prepareResponse = <K extends AnyReceiveMethodName>(
   method: K,
-  props?: K extends RequestMethodName ? RequestProps<K> & RequestIdProp : RequestIdProp
-): VKBridgeSuccessEvent<K> | null => {
+  props?: K extends AnyRequestMethodName ? RequestProps<K> & RequestIdProp : RequestIdProp
+): VKBridgeResultEvent<K> => {
   if (!isReceiveMockMethodExists(method)) {
-    // TODO
-    return null;
+    throw new Error(`Missing mock data for ${method} event`);
   }
 
-  const data = {
-    // FIXME: any
-    ...getMockData(method, props as any)!,
-    request_id: state.getNextRequestId()
-  };
+  const mockData: ReceiveData<K> | null = getMockData(method, props);
 
-  const event: VKBridgeSuccessEvent<K> = {
-    detail: {
-      type: receiveOnlyMethods.includes(method as any) ? method : method + 'Result',
-      data
-    }
-  };
+  if (mockData == null) {
+    throw new Error(`Unable to get mock data for ${method} event`);
+  }
 
-  return event;
+  if (isReceiveOnlyMethod(method)) {
+    return {
+      detail: {
+        type: method,
+        data: mockData
+      }
+    } as VKBridgeResultEvent<K>;
+  } else {
+    const data: ReceiveData<K> & RequestIdProp = {
+      ...getMockData(method, props as any)!,
+      request_id: state.getNextRequestId()
+    };
+
+    const type = method + 'Result';
+
+    return {
+      detail: {
+        type,
+        data
+      }
+    } as VKBridgeResultEvent<K>;
+  }
 };
 
-export const isReceiveMockMethodExists = (methodName: string): methodName is ReceiveMethodName =>
+export const isReceiveMockMethodExists = (methodName: string): methodName is AnyReceiveMethodName =>
   methodName in mockDataMap;
 
 export const send: VKBridgeSend = async (method, props) => {
@@ -86,7 +104,7 @@ export const send: VKBridgeSend = async (method, props) => {
       return;
     }
 
-    const event = prepareResponse(method as ReceiveMethodName, props);
+    const event = prepareResponse(method as AnyReceiveMethodName, props);
 
     if (!event) {
       return;

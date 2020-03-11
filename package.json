@@ -7,6 +7,7 @@
   "module": "dist/index.es.js",
   "jsxnext:main": "dist/index.es.js",
   "types": "dist/types/index.d.ts",
+  "umdName": "vkBridgeMock",
   "scripts": {
     "test": "jest",
     "build": "rimraf dist && NODE_ENV=production rollup -c",
@@ -41,6 +42,6 @@
     "typescript": "^3.6.4"
   },
   "dependencies": {
-    "@vkontakte/vk-bridge": "^2.0.0"
+    "@vkontakte/vk-bridge": "^2.1.1"
   }
 }

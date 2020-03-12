@@ -1,11 +1,12 @@
 import bridge from '../src';
-import { ReceiveMethodName, VKBridgeEvent, RequestIdProp, ReceiveOnlyMethodName } from '@vkontakte/vk-bridge';
+import { VKBridgeEvent, RequestIdProp, AnyReceiveMethodName } from '@vkontakte/vk-bridge';
 import { callReceiveOnlyMethod, receiveOnlyMethods } from '../src/mockFn';
 import { mockDataMap } from '../src/mockData';
 
 export const ioMethods = Object.keys(mockDataMap).filter(methodName => !receiveOnlyMethods.includes(methodName as any));
 
-const dropRequestId = <A extends RequestIdProp>(data: A) => {
+const dropRequestId = (data: {}) => {
+  // @ts-ignore
   const { request_id, ...out } = data;
 
   return out;
@@ -27,7 +28,7 @@ describe('Receive only events', () => {
       methodName,
       () =>
         new Promise(resolve => {
-          const handler = (event: VKBridgeEvent<ReceiveMethodName>) => {
+          const handler = (event: VKBridgeEvent<AnyReceiveMethodName>) => {
             expect(event.detail.type).toBe(methodName);
             expect(dropRequestId(event.detail.data)).toMatchSnapshot(methodName);
 

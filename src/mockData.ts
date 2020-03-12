@@ -101,8 +101,8 @@ export const mockDataMap: {
   VKWebAppGetCommunityAuthToken: () => ({ access_token: mockAccessToken }),
   VKWebAppCommunityAccessToken: () => ({ access_token: mockAccessToken }),
   VKWebAppCommunityToken: () => ({ access_token: mockAccessToken }),
-  VKWebAppDisableSwipeBack: () => ({}),
-  VKWebAppEnableSwipeBack: () => ({}),
+  VKWebAppDisableSwipeBack: () => ({ result: true }),
+  VKWebAppEnableSwipeBack: () => ({ result: true }),
   // Incoming only methods
   VKWebAppAudioPaused: () => ({ type: 'file', position: 34, id: 'audio_track_01.mp3' }),
   VKWebAppAudioStopped: () => ({}),

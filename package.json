@@ -42,6 +42,6 @@
     "typescript": "^3.6.4"
   },
   "dependencies": {
-    "@vkontakte/vk-bridge": "^2.1.1"
+    "@vkontakte/vk-bridge": "^2.1.2"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@vkontakte/vk-bridge-mock",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "VK Bridge Mock for development in browser",
   "main": "dist/index.js",
   "browser": "dist/index.umd.js",

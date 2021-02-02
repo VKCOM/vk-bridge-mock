@@ -1,4 +1,5 @@
 import { ReceiveDataMap, ReceiveMethodName, RequestMethodName, RequestPropsMap } from '@vkontakte/vk-bridge';
+import { state } from './state'
 
 const mockAccessToken = 'yours000access111token222yours000access111token222yours000access111token2220123456789';
 
@@ -84,14 +85,9 @@ export const mockDataMap: {
   VKWebAppShowOrderBox: () => ({ status: 'cancel' }),
   VKWebAppShowRequestBox: () => ({ success: true, requestKey: '123242' }),
   VKWebAppShowWallPostBox: () => ({ post_id: 1 }),
-  VKWebAppStorageGet: () => ({
-    keys: [
-      { key: 'somekey0', value: 'somevalue0' },
-      { key: 'somekey1', value: 'somevalue1' }
-    ]
-  }),
-  VKWebAppStorageGetKeys: () => ({ keys: ['somekey0', 'somekey1'] }),
-  VKWebAppStorageSet: () => ({ result: true }),
+  VKWebAppStorageGet: state.getAppStorage.bind(state),
+  VKWebAppStorageGetKeys: state.getAppStorageKeys.bind(state),
+  VKWebAppStorageSet: state.setAppStorageItem.bind(state),
   VKWebAppTapticImpactOccurred: () => ({ result: true }),
   VKWebAppTapticNotificationOccurred: () => ({ result: true }),
   VKWebAppTapticSelectionChanged: () => ({ result: true }),

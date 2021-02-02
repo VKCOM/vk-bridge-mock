@@ -13,6 +13,7 @@ import {
   AnyMethodName
 } from '@vkontakte/vk-bridge';
 import { mockDataMap } from './mockData';
+import { state } from './state';
 
 export const receiveOnlyMethods: ReceiveOnlyMethodName[] = [
   'VKWebAppAudioPaused',
@@ -25,16 +26,6 @@ export const receiveOnlyMethods: ReceiveOnlyMethodName[] = [
   'VKWebAppViewHide',
   'VKWebAppViewRestore'
 ];
-
-const state = {
-  listeners: [] as VKBridgeSubscribeHandler[],
-  currentRequestId: 0,
-  getNextRequestId() {
-    this.currentRequestId++;
-
-    return this.currentRequestId;
-  }
-};
 
 const getMockData = <T extends AnyReceiveMethodName>(
   methodName: T,

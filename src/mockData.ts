@@ -39,17 +39,6 @@ export const mockDataMap: {
     ]
   }),
   VKWebAppGetGeodata: () => ({ available: true, lat: '-37', long: '89' }),
-  VKWebAppGetGroupInfo: () => ({
-    description: 'Group description',
-    id: 201194433,
-    is_closed: 0,
-    members_count: 11,
-    name: 'Group name',
-    photo_50: 'https://sun1-14.userapi.com/s/v1/ig2/6X1MolMuxoFE2C82xjD51t4OIlQVSCx3Z7QuFROA5BYKewid5HHrX5xbo69VBLu4g4O_83fYLiUdzRL4NHxLCl4L.jpg?size=100x0&quality=96&crop=371,86,396,396&ava=1',
-    photo_100: 'https://sun1-14.userapi.com/s/v1/ig2/dOQnEFbTwRRgkcCyaG_dNURDRy2JvMDaCpKzRkI5rVN8v2ehdjxuNlSTkCiquKxgoowjkedj8qyjA2iZXc7dHUmh.jpg?size=200x0&quality=96&crop=371,86,396,396&ava=1',
-    photo_200: 'https://sun1-14.userapi.com/s/v1/ig2/dOQnEFbTwRRgkcCyaG_dNURDRy2JvMDaCpKzRkI5rVN8v2ehdjxuNlSTkCiquKxgoowjkedj8qyjA2iZXc7dHUmh.jpg?size=200x0&quality=96&crop=371,86,396,396&ava=1',
-    screen_name: 'club201194433',
-  }),
   VKWebAppGetPersonalCard: () => ({
     phone: '+79001112233',
     email: 'ivan@gmail.com',

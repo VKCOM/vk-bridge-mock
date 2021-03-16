@@ -47,7 +47,28 @@ const bridgeMock: VKBridge = {
    *
    * @returns Result of checking.
    */
-  isWebView: (): boolean => bridge.isWebView()
+  isWebView: (): boolean => bridge.isWebView(),
+
+  /**
+   * Checks whether the runtime is an iframe.
+   *
+   * @returns Result of checking.
+   */
+   isIframe: (): boolean => bridge.isIframe(),
+
+   /**
+   * Checks whether the runtime is embedded.
+   *
+   * @returns Result of checking.
+   */
+  isEmbedded: (): boolean => bridge.isEmbedded(),
+
+  /**
+   * Checks whether the runtime is standalone.
+   *
+   * @returns Result of checking.
+   */
+   isStandalone: (): boolean => bridge.isStandalone(),
 };
 
 // Esm exports

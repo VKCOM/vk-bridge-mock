@@ -1,10 +1,10 @@
-import { ReceiveDataMap, ReceiveMethodName, RequestMethodName, RequestPropsMap } from '@vkontakte/vk-bridge';
+import { ReceiveDataMap, AnyReceiveMethodName, AnyRequestMethodName, RequestPropsMap } from '@vkontakte/vk-bridge';
 import { state } from './state'
 
 const mockAccessToken = 'yours000access111token222yours000access111token222yours000access111token2220123456789';
 
 export const mockDataMap: {
-  [T in ReceiveMethodName]: (props: T extends RequestMethodName ? RequestPropsMap[T] : {}) => ReceiveDataMap[T];
+  [T in AnyReceiveMethodName]: (props: T extends AnyRequestMethodName ? RequestPropsMap[T] : {}) => ReceiveDataMap[T];
 } = {
   VKWebAppInit: () => ({ result: true }),
   VKWebAppAddToCommunity: () => ({ group_id: 123_456_789 }),
@@ -19,7 +19,7 @@ export const mockDataMap: {
         is_closed: false,
         can_access_closed: true,
         city: { id: 5331, title: 'Los Angeles' },
-        photo_50: 'https://sun9-12.u...0uN_RKSXc.jpg?ava=1',
+        photo_50: 'https://vk.com/images/camera_50.png',
         verified: 1
       }
     ]
@@ -34,11 +34,11 @@ export const mockDataMap: {
   VKWebAppGetEmail: () => ({ email: 'test@gmail.com', sign: 'Y1C99xnbEaR8Wred' }),
   VKWebAppGetFriends: () => ({
     users: [
-      { id: 2884043, first_name: 'Albert', last_name: 'Usmanov' },
-      { id: 1894768, first_name: 'Aleksandra', last_name: 'Sokolovskaya' }
+      { id: 2884043, first_name: 'Albert', last_name: 'Usmanov', sex: 2, photo_200: 'https://vk.com/images/camera_200.png' },
+      { id: 1894768, first_name: 'Aleksandra', last_name: 'Sokolovskaya', sex: 1, photo_200: 'https://vk.com/images/camera_200.png' },
     ]
   }),
-  VKWebAppGetGeodata: () => ({ available: true, lat: '-37', long: '89' }),
+  VKWebAppGetGeodata: () => ({ available: 1, lat: 59.938, long: 30.312, accuracy: 65 }),
   VKWebAppGetPersonalCard: () => ({
     phone: '+79001112233',
     email: 'ivan@gmail.com',
@@ -58,8 +58,8 @@ export const mockDataMap: {
     city: { id: 2, title: 'Санкт-Петербург' },
     country: { id: 1, title: 'Россия' },
     bdate: '10.4.1990',
-    photo_100: 'https://pp.userapi.com/c836333/v836333553/5b138/2eWBOuj5A4g.jpg',
-    photo_200: 'https://pp.userapi.com/c836333/v836333553/5b137/tEJNQNigU80.jpg',
+    photo_100: 'https://vk.com/images/camera_100.png',
+    photo_200: 'https://vk.com/images/camera_200.png',
     timezone: 3
   }),
   VKWebAppJoinGroup: () => ({ result: true }),
@@ -76,7 +76,7 @@ export const mockDataMap: {
   VKWebAppScroll: () => ({ top: 1, height: 2040 }),
   VKWebAppSetLocation: () => ({ result: true }),
   VKWebAppSetViewSettings: () => ({ result: true }),
-  VKWebAppShare: () => ({ type: 'message' }),
+  VKWebAppShare: () => ({ type: 'link' }),
   VKWebAppShowCommunityWidgetPreviewBox: () => ({ result: true }),
   VKWebAppShowImages: () => ({ result: true }),
   VKWebAppShowInviteBox: () => ({ success: true }),
@@ -94,9 +94,6 @@ export const mockDataMap: {
   VKWebAppAddToFavorites: () => ({ result: true }),
   VKWebAppSendPayload: () => ({ result: true }),
   VKWebAppGetCommunityToken: () => ({ access_token: mockAccessToken }),
-  VKWebAppGetCommunityAuthToken: () => ({ access_token: mockAccessToken }),
-  VKWebAppCommunityAccessToken: () => ({ access_token: mockAccessToken }),
-  VKWebAppCommunityToken: () => ({ access_token: mockAccessToken }),
   VKWebAppDisableSwipeBack: () => ({ result: true }),
   VKWebAppEnableSwipeBack: () => ({ result: true }),
   // Incoming only methods
@@ -130,5 +127,40 @@ export const mockDataMap: {
   VKWebAppGyroscopeStop: () => ({ result: true }),
   VKWebAppLocationChanged: () => ({ location: 'test' }),
   VKWebAppSubscribeStoryApp: () => ({ access_key: mockAccessToken }),
-  VKWebAppUpdateInsets: () => ({ insets: { right: 0, top: 44, left: 0, bottom: 34 } })
+  VKWebAppUpdateInsets: () => ({ insets: { right: 0, top: 44, left: 0, bottom: 34 } }),
+  VKWebAppAddToHomeScreen: () => ({ result: true }),
+  VKWebAppAddToHomeScreenInfo: () => ({ is_feature_supported: true, is_added_to_home_screen: true }),
+  OKWebAppCallAPIMethod: () => ({
+    response: [
+      {
+        id: 584276368330,
+        last_name: 'Терещенков',
+        is_closed: false,
+        can_access_closed: true,
+        first_name: 'Денис',
+      },
+    ],
+  }),
+  VKWebAppDownloadFile: () => ({ result: true }),
+  VKWebAppLeaveGroup: () => ({ result: true }),
+  VKWebAppAddToMenu: () => ({ result: true }),
+  VKWebAppSendToClient: () => ({ result: true }),
+  VKWebAppOpenWallPost: () => ({ result: true }),
+  VKWebAppSetSwipeSettings: () => ({ result: true }),
+  VKWebAppGetGroupInfo: () => ({
+    id: 166562603,
+    name: 'VK Mini Apps',
+    screen_name: 'club166562603',
+    photo_50: 'https://vk.com/images/community_50.png',
+    photo_100: 'https://vk.com/images/community_100.png',
+    photo_200: 'https://vk.com/images/community_200.png',
+    is_closed: 0,
+    members_count: 46978,
+    description: 'Group Description',
+    type: 'page',
+    is_member: 1,
+  }),
+  VKWebAppLibverifyOnConfirmed: () => ({ validate_session: 'some_string', validate_token: 'some_token' }),
+  VKWebAppLibverifyOnFailed: () => ({ code: 'INCORRECT_PHONE_NUMBER' }),
+  VKWebAppRetargetingPixel: () => ({ result: true }),
 };

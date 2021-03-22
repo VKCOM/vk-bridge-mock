@@ -7,7 +7,6 @@ import {
   RequestIdProp,
   VKBridgeSubscribeHandler,
   VKBridgeSend,
-  ReceiveOnlyMethodName,
   VKBridgeResultEvent,
   AnyReceiveOnlyMethodName,
   AnyMethodName
@@ -15,7 +14,7 @@ import {
 import { mockDataMap } from './mockData';
 import { state } from './state';
 
-export const receiveOnlyMethods: ReceiveOnlyMethodName[] = [
+export const receiveOnlyMethods: AnyReceiveOnlyMethodName[] = [
   'VKWebAppAudioPaused',
   'VKWebAppAudioStopped',
   'VKWebAppAudioTrackChanged',
@@ -56,7 +55,7 @@ export const prepareResponse = <K extends AnyReceiveMethodName>(
     throw new Error(`Missing mock data for ${method} event`);
   }
 
-  const mockData: ReceiveData<K> | null = getMockData(method, props);
+  const mockData = getMockData(method as AnyReceiveMethodName, props);
 
   if (mockData == null) {
     throw new Error(`Unable to get mock data for ${method} event`);
@@ -116,7 +115,7 @@ export const unsubscribe = (fn: VKBridgeSubscribeHandler) => {
   }
 };
 
-export const callReceiveOnlyMethod = (methodName: ReceiveOnlyMethodName) => {
+export const callReceiveOnlyMethod = (methodName: AnyReceiveOnlyMethodName) => {
   if (receiveOnlyMethods.includes(methodName)) {
     const event = prepareResponse(methodName);
 
